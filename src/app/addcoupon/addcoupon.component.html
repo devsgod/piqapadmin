@@ -1,0 +1,80 @@
+<ngx-spinner type="ball-pulse-sync" color="#e74c3c">
+  <p style="font-size: 20px; color: #e74c3c">Please wait...</p>
+</ngx-spinner>
+
+<div class="row">
+  <div class="col-sm-12">
+
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h5>Create Coupon </h5>
+      </div>
+      <div class="card-body reset-table p-t-0">
+        <div class="form-group row">
+
+          <div class="col-md-12 col-12">
+            <label>Available on</label>
+            <ng-select [items]="getList()" [(ngModel)]="selectedItems" [placeholder]="'Select Restaurants'" bindLabel="name" bindValue="id" [multiple]="true" [closeOnSelect]="false"
+              placeholder="Select cities" name="fieldName" ngDefaultControl [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)">
+            </ng-select>
+          </div>
+
+          <div class="col-sm-6">
+            <label>Offer Code</label>
+            <input [(ngModel)]="code" type="text" class="form-control"
+              [placeholder]="'Offer Code' || '&nbsp;'" required>
+          </div>
+          <div class="col-sm-6">
+            <label>Description</label>
+            <input type="text" [(ngModel)]="desc" class="form-control"
+              [placeholder]="'Short description' || '&nbsp;'">
+          </div>
+          <div class="col-sm-6">
+            <label>Min Cart Price</label>
+            <input type="number" [(ngModel)]="min" class="form-control"
+              [placeholder]="'Min Price' || '&nbsp;'">
+          </div>
+          <div class="col-sm-6">
+            <label>Offer In</label>
+            <select name="select" [(ngModel)]="type" class="form-control">
+              <option value="%">% Off</option>
+              <option value="$">{{getCurreny()}} Off</option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+            <label>Discout Value</label>
+            <input type="number" [(ngModel)]="discout" class="form-control"
+              [placeholder]="'Discout Value' || '&nbsp;'">
+          </div>
+          <div class="col-sm-3">
+            <label>Discout Value Upto<span class="optional">(Optional)</span> </label>
+            <input type="number" [(ngModel)]="upto" class="form-control"
+              [placeholder]="'Discout Value Upto' || '&nbsp;'">
+          </div>
+          <div class="col-sm-3">
+            <label>Status</label>
+            <select name="select" [(ngModel)]="status" class="form-control">
+              <option value="active">Active</option>
+              <option value="deactive">Deactive</option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+            <label>Expire Date </label>
+            <input type="date" [(ngModel)]="date" class="form-control"
+              [placeholder]="'Expire Date' || '&nbsp;'">
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <button class="btn btn-danger btn-round" (click)="create()">Create Coupon</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <ng2-toasty></ng2-toasty> -->

@@ -1,0 +1,176 @@
+<!--Statistics cards Starts-->
+<div class="row" (resized)="onResized($event)">
+  <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+    <div class="card gradient-purple-love">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media pb-1">
+            <div class="media-body white text-left">
+              <h3 class="font-large-1 white mb-0">{{orders.length}}</h3>
+              <span>Orders</span>
+            </div>
+            <div class="media-right white text-right">
+              <i class="ft-activity font-large-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+    <div class="card gradient-ibiza-sunset">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media pb-1">
+            <div class="media-body white text-left">
+              <h3 class="font-large-1 white mb-0">{{rest.length}}</h3>
+              <span>Users</span>
+            </div>
+            <div class="media-right white text-right">
+              <i class="ft-percent font-large-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+    <div class="card gradient-mint">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media pb-1">
+            <div class="media-body white text-left">
+              <h3 class="font-large-1 white mb-0">{{users.length}}</h3>
+              <span>Restaurants</span>
+            </div>
+            <div class="media-right white text-right">
+              <i class="ft-trending-up font-large-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+    <div class="card gradient-king-yna">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media pb-1">
+            <div class="media-body white text-left">
+              <h3 class="font-large-1 white mb-0">$32,454</h3>
+              <span>Total Earning</span>
+            </div>
+            <div class="media-right white text-right">
+              <i class="ft-credit-card font-large-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Statistics cards Ends-->
+<div class="row">
+  <!-- Reset Order Start -->
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h5>Recent 10 Order</h5>
+      </div>
+      <div class="card-body reset-table p-t-0">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr class="text-uppercase">
+                <th>User</th>
+                <th>User Name</th>
+                <th>Restaurant</th>
+                <th class="tr-center">Status</th>
+                <th>Ordered on</th>
+                <th>Total</th>
+                <th>Quantity</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dummy">
+                <td>
+                  <ngx-skeleton-loader count="1" [theme]="{
+                    'border-radius': '5px',
+                    height: '10px',
+                    border: '1px solid white'
+                  }"></ngx-skeleton-loader>
+                </td>
+                <td>
+                  <ngx-skeleton-loader count="1" [theme]="{
+                        'border-radius': '5px',
+                        height: '10px',
+                        border: '1px solid white'
+                      }"></ngx-skeleton-loader>
+                </td>
+                <td>
+                  <ngx-skeleton-loader count="1" [theme]="{
+                    'border-radius': '5px',
+                    height: '10px',
+                    border: '1px solid white'
+                  }"></ngx-skeleton-loader>
+                </td>
+                <td>
+                  <ngx-skeleton-loader count="1" [theme]="{
+                      'border-radius': '5px',
+                      height: '10px',
+                      border: '1px solid white'
+                    }"></ngx-skeleton-loader>
+                </td>
+                <td>
+                  <ngx-skeleton-loader count="1" [theme]="{
+                      'border-radius': '5px',
+                      height: '10px',
+                      border: '1px solid white'
+                    }"></ngx-skeleton-loader>
+                </td>
+                <td>
+                  <ngx-skeleton-loader count="1" [theme]="{
+                    'border-radius': '5px',
+                    height: '10px',
+                    border: '1px solid white'
+                  }"></ngx-skeleton-loader>
+                </td>
+                <td>
+                  <ngx-skeleton-loader count="1" [theme]="{
+                      'border-radius': '5px',
+                      height: '10px',
+                      border: '1px solid white'
+                    }"></ngx-skeleton-loader>
+                </td>
+                <td>
+                  <ngx-skeleton-loader count="1" [theme]="{
+                        'border-radius': '5px',
+                        height: '10px',
+                        border: '1px solid white'
+                      }"></ngx-skeleton-loader>
+                </td>
+              </tr>
+              <tr *ngFor="let item of displayOrders;let i = index">
+                <td><a href="javascript:;"><img class="img-responsive" style="height: 40px;border-radius: 50%;"
+                      [src]="item.uid.cover" onError="this.src='assets/images/user.png'" alt="chat-user"></a>
+                </td>
+                <td> {{item.uid.fullname}}</td>
+                <td>{{item.vid.name}}</td>
+                <td class="tr-center"><div [className]="getClass(item.status)">{{item.status}}</div></td>
+                <td>{{getDates(item.time)}}</td>
+                <td> {{getCurreny()}} {{item.grandTotal}}</td>
+                <td>{{item.order.length}}</td>
+                <td><button type="button" (click)="openOrder(item)"
+                    class="btn btn-success btn-round btn-outline-success">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Reset Order End -->
+</div>

@@ -1,0 +1,163 @@
+<ngx-spinner type="ball-pulse-sync" color="#e74c3c">
+  <p style="font-size: 20px; color: #e74c3c">Please wait...</p>
+</ngx-spinner>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" style="padding:10px 10px 10px 10px"> 
+      <div class="card-body">
+        <h5> <span *ngIf="new">CREATE NEW</span> <span *ngIf="!new">Edit</span>
+          Food </h5>
+      </div>
+        <h4 class="sub-title">Food Details</h4>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label>Select Category</label>
+            <select name="select" [(ngModel)]="category" class="form-control">
+              <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="name" class="form-control"
+              [placeholder]="'Name' || '&nbsp;'">
+          </div>
+         
+          <div class="col-sm-6"> 
+            <label>Price</label>
+            <input [(ngModel)]="price" type="number" class="form-control" placeholder="Price">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12"> 
+            <label>Description</label>
+            <textarea [(ngModel)]="desc" class="form-control" placeholder="Description"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-11"> 
+            <label>Status</label>
+            <select [(ngModel)]="status" class="form-control">
+              <option value="true">Available</option>
+              <option value="false">Hide</option>
+            </select>
+          </div>
+
+          <div class="col-sm-1">
+            <label>Veg</label>
+  
+            <input [(ngModel)]="veg" type="checkbox" class="form-control">
+
+          </div>
+         
+          
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 col-form-label">Upload cover image here</label>
+          <div class="col-sm-4">
+            <input (change)="preview_banner($event.target.files)" type="file" class="form-control">
+          </div>
+          <div class="col-sm-4">
+            <img [src]="coverImage" alt="" style="height: 100px;width: 100px;float: right;"
+              onError="this.src='assets/icon.png'">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <button class="btn btn-success btn-round" (click)="addSize()" style="float:right;font-size:20px;">+</button>
+            <h1 class="sub-title" style="font-size:18px;">
+              SIZE
+            </h1>
+          </div>
+        </div>
+
+        <div *ngFor="let s of sizes; let in=index" class="form-group row">
+          <div class="col-sm-5">
+            <input type="text" [(ngModel)]="sizes[in].title" name="sizename[{{in}}]" class="form-control" #name="ngModel" placeholder="Title" required />
+          </div>
+          <div class="col-sm-5">
+            <input type="number" [(ngModel)]="sizes[in].price" name="sizeprice[{{in}}]" class="form-control" #name="ngModel" placeholder="Price" required />
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-sm btn-danger" (click)="removeSize(in)">
+              <i class="icofont icofont-bin"></i> 
+            </button> 
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <button class="btn btn-success btn-round" (click)="addAddon()" style="float:right;font-size:20px;">+</button>
+            <h1 class="sub-title" style="font-size:18px;"> 
+              ADD-ONS
+            </h1>
+          </div>
+        </div>
+
+        <div *ngFor="let a of addons; let in=index" class="form-group row">
+          <div class="col-sm-5">
+            <select [(ngModel)]="addons[in].type" name="addontype[{{in}}]" class="form-control" #name="ngModel" required>
+              <option value="radio">Radio</option>
+              <option value="check">Check</option>
+            </select>
+          </div>
+          <div class="col-sm-5">
+            <input type="text" [(ngModel)]="addons[in].title" name="addontitle[{{in}}]" class="form-control" #name="ngModel" placeholder="Title" required />
+          </div>
+          <div class="col-sm-1">
+            <button class="btn btn-sm btn-success" (click)="add(in)">
+              <i class="icofont icofont-plus-circle"></i> 
+            </button>
+          </div>
+          <div class="col-sm-1">
+            <button class="btn btn-sm btn-danger" (click)="removeAddon(in)">
+              <i class="icofont icofont-bin"></i> 
+            </button>
+          </div>
+        </div>
+
+        <div *ngFor="let s of ext; let in=index" class="form-group row">
+          <div class="col-sm-5">
+            <input type="text" [(ngModel)]="ext[in].title" name="addonname[{{in}}]" class="form-control" #name="ngModel" placeholder="Title" required />
+          </div>
+          <div class="col-sm-5">
+            <input type="number" [(ngModel)]="ext[in].price" name="addonprice[{{in}}]" class="form-control" #name="ngModel" placeholder="Price" required />
+          </div>
+          <div class="col-sm-2"> 
+            <button class="btn btn-sm btn-danger" (click)="removeExt(in)">
+              <i class="icofont icofont-bin"></i> 
+            </button> 
+          </div>
+        </div>
+      
+
+
+        <div class="form-group row">
+          <div class="col-sm-12"> 
+            <button class="btn btn-danger btn-round" (click)="create()"
+              *ngIf="new">Create New Food
+            </button>
+            <button class="btn btn-danger btn-round" (click)="updateFood()" *ngIf="!new">
+              Update Food </button>
+          </div>
+        </div>
+
+       
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- <ng2-toasty></ng2-toasty> -->
