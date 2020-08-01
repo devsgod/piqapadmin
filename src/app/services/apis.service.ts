@@ -907,7 +907,7 @@ public getFood(id,uuid): Promise<any> {
     console.log(informations); 
     console.log("********************");
     return new Promise<any>((resolve, reject) => {
-      this.adb.collection('foods/'+informations.uuid+'/all').doc(informations.id).delete().then((data) => {
+      this.adb.collection('foods/'+informations.uid+'/all').doc(informations.id).delete().then((data) => {
         resolve(data);
       }, error => {
         reject(error);

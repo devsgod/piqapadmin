@@ -50,13 +50,23 @@
             <input type="text" [(ngModel)]="name" class="form-control"
               [placeholder]="'Restaurants Name' || '&nbsp;'">
           </div>
+
           <div class="col-sm-6">
             <label>Select Cuisine</label>
-            <ng-multiselect-dropdown [placeholder]="'Select Cuisine' || '&nbsp;'" maxHeight="100"
-              [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+            <ng-multiselect-dropdown [placeholder]="'Select Cuisine' || '&nbsp;'" maxHeight="100" [settings]="dropdownSettings"
+              [data]="dropdownList" [(ngModel)]="selectedItems" 
               (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
           </div>
+
+          <!-- <div class="col-sm-6">
+            <label>Select Cuisine</label>
+            <ng-select  [(ngModel)]="selectedItems" [settings]="dropdownSettings" bindLabel="item_text" bindValue="item_id" [placeholder]="'Select Cusines'" [multiple]="true" [closeOnSelect]="false"
+              name="fieldName" ngDefaultControl  [items]="dropdownList" (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)">
+            </ng-select>
+          </div> -->
+
           <div class="col-sm-12">
             <label>Address</label>
             <input type="text" [(ngModel)]="address" ngx-google-places-autocomplete #placesRef="ngx-places"
@@ -66,11 +76,19 @@
 
           <div class="col-sm-6">
             <label>Delivery/PickUp</label>
-            <ng-multiselect-dropdown [placeholder]="'Select Delivery/PickUp' || '&nbsp;'" maxHeight="100"
-              [data]="dropdownListDP" [(ngModel)]="selectedItemsDP" [settings]="dropdownSettings"
-              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            <ng-multiselect-dropdown [settings]="dropdownSettings" [placeholder]="'Select Delivery/PickUp' || '&nbsp;'" maxHeight="100"
+              [data]="dropdownListDP" [(ngModel)]="selectedItemsDP" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
           </div>
+
+          <!-- <div class="col-sm-6">
+            <label>Select Cuisine</label>
+            <ng-select  [(ngModel)]="selectedItemsDP" [placeholder]="'Select Delivery/PickUp' || '&nbsp;'" bindLabel="item_text" bindValue="item_id" [multiple]="true" [closeOnSelect]="false"
+              ngDefaultControl [settings]="dropdownSettings" [items]="dropdownList" (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)">
+            </ng-select>
+          </div> -->
+
           <div class="col-sm-6">
             <label>Delivery Charge</label>
             <input type="text" [(ngModel)]="deliveryCharge" class="form-control" placeholder="Delivery Charge $" >

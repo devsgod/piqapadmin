@@ -26,6 +26,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     NgSelectModule,
     ReactiveFormsModule
-  ]
+  ],
+  schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class RestdetailsModule { }

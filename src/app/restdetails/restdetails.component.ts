@@ -75,61 +75,36 @@ export class RestdetailsComponent implements OnInit {
       this.new = data.register === 'true' ? true : false;
       console.log(this.new);
       console.log(data.hasOwnProperty('id'));
-      this.dropdownList = [
-        { item_id: 'Mediterranean', item_text: 'Mediterranean' },
-        { item_id: 'Middle Eastern', item_text: 'Middle Eastern' },
-        { item_id: 'Vegan', item_text: 'Vegan' },
-        { item_id: 'Salad Bar', item_text: 'Salad Bar' },
-        { item_id: 'Halal & Kosher', item_text: 'Halal & Kosher' },
-        { item_id: 'Italian', item_text: 'Italian' },
-        { item_id: 'Mexican', item_text: 'Mexican' },
-        { item_id: 'Chinese', item_text: 'Chinese' },
-        { item_id: 'Indian', item_text: 'Indian' },
-        { item_id: 'Japanese', item_text: 'Japanese' }
-      ];
-      this.dropdownListDP = [
-        { item_id: 'Delivery', item_text: 'Delivery' },
-        { item_id: 'Pickup', item_text: 'Pickup' }
-      ];
-      this.dropdownSettings = {
-        singleSelection: false,
-        idField: 'item_id',
-        textField: 'item_text',
-        selectAllText: 'Select All',
-        unSelectAllText: 'UnSelect All',
-        allowSearchFilter: true
-      };
-      // this.selectedItems = [];
-      // this.selectedItemsDP = [];
+    
       if (data.hasOwnProperty('id')) {
         this.id = data.id;
         this.getVenue();
       } else {
         console.log("nice");
-        // this.dropdownList = [
-        //   { item_id: 'Mediterranean', item_text: 'Mediterranean' },
-        //   { item_id: 'Middle Eastern', item_text: 'Middle Eastern' },
-        //   { item_id: 'Vegan', item_text: 'Vegan' },
-        //   { item_id: 'Salad Bar', item_text: 'Salad Bar' },
-        //   { item_id: 'Halal & Kosher', item_text: 'Halal & Kosher' },
-        //   { item_id: 'Italian', item_text: 'Italian' },
-        //   { item_id: 'Mexican', item_text: 'Mexican' },
-        //   { item_id: 'Chinese', item_text: 'Chinese' },
-        //   { item_id: 'Indian', item_text: 'Indian' },
-        //   { item_id: 'Japanese', item_text: 'Japanese' }
-        // ];
-        // this.dropdownListDP = [
-        //   { item_id: 'Delivery', item_text: 'Delivery' },
-        //   { item_id: 'Pickup', item_text: 'Pickup' }
-        // ];
-        // this.dropdownSettings = {
-        //   singleSelection: false,
-        //   idField: 'item_id',
-        //   textField: 'item_text',
-        //   selectAllText: 'Select All',
-        //   unSelectAllText: 'UnSelect All',
-        //   allowSearchFilter: true
-        // };
+        this.dropdownList = [
+          { item_id: 'Mediterranean', item_text: 'Mediterranean' },
+          { item_id: 'Middle Eastern', item_text: 'Middle Eastern' },
+          { item_id: 'Vegan', item_text: 'Vegan' },
+          { item_id: 'Salad Bar', item_text: 'Salad Bar' },
+          { item_id: 'Halal & Kosher', item_text: 'Halal & Kosher' },
+          { item_id: 'Italian', item_text: 'Italian' },
+          { item_id: 'Mexican', item_text: 'Mexican' },
+          { item_id: 'Chinese', item_text: 'Chinese' },
+          { item_id: 'Indian', item_text: 'Indian' },
+          { item_id: 'Japanese', item_text: 'Japanese' }
+        ];
+        this.dropdownListDP = [
+          { item_id: 'Delivery', item_text: 'Delivery' },
+          { item_id: 'Pickup', item_text: 'Pickup' }
+        ];
+        this.dropdownSettings = {
+          singleSelection: false,
+          idField: 'item_id',
+          textField: 'item_text',
+          selectAllText: 'Select All',
+          unSelectAllText: 'UnSelect All',
+          allowSearchFilter: true
+        };
         this.selectedItems = [];
         this.selectedItemsDP = [];
       }
@@ -183,37 +158,37 @@ export class RestdetailsComponent implements OnInit {
           });
         });
 
-        // this.cusineDP.forEach(element => {
-        //   this.selectedItemsDP.push({
-        //     item_id: element,
-        //     item_text: element
-        //   });
-        // });
+        this.cusineDP.forEach(element => {
+          this.selectedItemsDP.push({
+            item_id: element,
+            item_text: element
+          });
+        });
 
-        // this.dropdownList = [
-        //   { item_id: 'Mediterranean', item_text: 'Mediterranean' },
-        //   { item_id: 'Middle Eastern', item_text: 'Middle Eastern' },
-        //   { item_id: 'Vegan', item_text: 'Vegan' },
-        //   { item_id: 'Salad Bar', item_text: 'Salad Bar' },
-        //   { item_id: 'Halal & Kosher', item_text: 'Halal & Kosher' },
-        //   { item_id: 'Italian', item_text: 'Italian' },
-        //   { item_id: 'Mexican', item_text: 'Mexican' },
-        //   { item_id: 'Chinese', item_text: 'Chinese' },
-        //   { item_id: 'Indian', item_text: 'Indian' },
-        //   { item_id: 'Japanese', item_text: 'Japanese' }
-        // ];
-        // this.dropdownListDP = [
-        //   { item_id: 'Delivery', item_text: 'Delivery' },
-        //   { item_id: 'Pickup', item_text: 'Pickup' }
-        // ];
-        // this.dropdownSettings = {
-        //   singleSelection: false,
-        //   idField: 'item_id',
-        //   textField: 'item_text',
-        //   selectAllText: 'Select All',
-        //   unSelectAllText: 'UnSelect All',
-        //   allowSearchFilter: true
-        // };
+        this.dropdownList = [
+          { item_id: 'Mediterranean', item_text: 'Mediterranean' },
+          { item_id: 'Middle Eastern', item_text: 'Middle Eastern' },
+          { item_id: 'Vegan', item_text: 'Vegan' },
+          { item_id: 'Salad Bar', item_text: 'Salad Bar' },
+          { item_id: 'Halal & Kosher', item_text: 'Halal & Kosher' },
+          { item_id: 'Italian', item_text: 'Italian' },
+          { item_id: 'Mexican', item_text: 'Mexican' },
+          { item_id: 'Chinese', item_text: 'Chinese' },
+          { item_id: 'Indian', item_text: 'Indian' },
+          { item_id: 'Japanese', item_text: 'Japanese' }
+        ];
+        this.dropdownListDP = [
+          { item_id: 'Delivery', item_text: 'Delivery' },
+          { item_id: 'Pickup', item_text: 'Pickup' }
+        ];
+        this.dropdownSettings = {
+          singleSelection: false,
+          idField: 'item_id',
+          textField: 'item_text',
+          selectAllText: 'Select All',
+          unSelectAllText: 'UnSelect All',
+          allowSearchFilter: true
+        };
         console.log(this.selectedItems);
         this.chMod.detectChanges();
       }
