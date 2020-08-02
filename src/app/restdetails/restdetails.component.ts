@@ -19,8 +19,10 @@ export class RestdetailsComponent implements OnInit {
   @ViewChild('placesRef', { static: false }) placesRef: GooglePlaceDirective;
   dropdownList = [];
   dropdownListDP = [];
+  dropdownListMile = [];
   selectedItems = [];
   selectedItemsDP = [];
+  selectedItemMiles: any;
   dropdownSettings = {};
   banner_to_upload: any = '';
   id: any;
@@ -30,7 +32,7 @@ export class RestdetailsComponent implements OnInit {
   longitude: any;
 
   coverImage: any;
-
+  tax_cities: any;
   image1: any;
   image2: any;
   image3: any;
@@ -58,6 +60,8 @@ export class RestdetailsComponent implements OnInit {
   totalOrders: any = 0;
   reviews: any[] = [];
   cities: any[] = [];
+
+  chargeList: any = [];
   constructor(
     private route: ActivatedRoute,
     private api: ApisService,
@@ -93,10 +97,22 @@ export class RestdetailsComponent implements OnInit {
           { item_id: 'Indian', item_text: 'Indian' },
           { item_id: 'Japanese', item_text: 'Japanese' }
         ];
+
         this.dropdownListDP = [
           { item_id: 'Delivery', item_text: 'Delivery' },
           { item_id: 'Pickup', item_text: 'Pickup' }
         ];
+        
+        this.dropdownListMile = [
+          { item_id: '1', item_text: '1 Mile' },
+          { item_id: '2', item_text: '2 Miles' },
+          { item_id: '3', item_text: '3 Miles' },
+          { item_id: '4', item_text: '4 Miles' },
+          { item_id: '5', item_text: '5 Miles' },
+          { item_id: '6', item_text: '6 Miles' },
+          { item_id: '7', item_text: '7 Miles' }
+        ];
+
         this.dropdownSettings = {
           singleSelection: false,
           idField: 'item_id',
@@ -151,6 +167,7 @@ export class RestdetailsComponent implements OnInit {
         this.city = data.city;
         this.closeTime = data.closeTime;
         this.phone = data.phone;
+        this.tax_cities = data.tax_cities;
         this.cusine.forEach(element => {
           this.selectedItems.push({
             item_id: element,
@@ -259,7 +276,7 @@ export class RestdetailsComponent implements OnInit {
     console.log(this.name, this.address, this.descritions,this.deliveryCharge, this.dishPrice, this.time,
       this.cusine, this.cusineDP, this.openTime, this.closeTime);
     if (this.name === '' || this.address === '' || this.descritions === '' || this.deliveryCharge === '' || this.dishPrice === '' || this.time === '' ||
-      !this.cusine || !this.cusineDP || this.phone === ''
+      !this.cusine || !this.cusineDP || this.phone === '' || this.tax_cities == ''
       || !this.phone || !this.cusine.length || !this.cusineDP.length ||  this.openTime === '' || this.closeTime === '' || !this.deliveryCharge || !this.dishPrice
       || !this.openTime || !this.closeTime) {
       this.error('All Fields are required');
@@ -307,7 +324,7 @@ export class RestdetailsComponent implements OnInit {
       lat: this.latitude,
       lng: this.longitude,
       cover: this.coverImage,
-      deliveryCharge: this.deliveryCharge,
+      deliveryCharge: this.chargeList,
       dishPrice: this.dishPrice,
       time: this.time,
       cusine: this.cusine,
@@ -318,6 +335,7 @@ export class RestdetailsComponent implements OnInit {
       phone: this.phone,
       status: 'open',
       city: this.city,
+      tax_cities: this.tax_cities,
       images: [
         this.image1 ? this.image1 : '',
         this.image2 ? this.image2 : '',
@@ -356,10 +374,26 @@ export class RestdetailsComponent implements OnInit {
       this.cusineDP.push(element.item_id);
     });
 
+    if (this.chargeList.length<1){
+      this.error('Add Charge');
+      alert("Add Delivery Charge");
+      return false;
+    } 
+    for (var i=0;i<this.chargeList.length;i++){
+      if(this.chargeList[i].distance == ""){
+        alert("Add Delivery Distance");
+        return false;
+      }
+      if (this.chargeList[i].charge == ""){
+        alert("Add Delivery Charge value");
+        return false;
+      }
+    }
     if (this.email === '' || this.fname === '' || this.lname === '' || this.phone === '' || this.password === ''
-      || this.name === '' || this.address === '' || this.descritions === '' || this.deliveryCharge === '' || this.dishPrice === '' || this.time === ''
+      || this.name === '' || this.address === '' || this.descritions === '' || this.dishPrice === '' || this.time === ''
       || this.city === '' || !this.city || !this.cusine || !this.cusine.length || !this.cusineDP || !this.cusineDP.length || this.openTime === '' || this.closeTime === '' ||
       !this.openTime || !this.closeTime) {
+        alert("All Fields are required!");
       this.error('All Fields are required');
       return false;
     }
@@ -416,7 +450,7 @@ export class RestdetailsComponent implements OnInit {
               lat: this.latitude,
               lng: this.longitude,
               cover: this.coverImage,
-              deliveryCharge: this.deliveryCharge,
+              deliveryCharge: this.chargeList,
               dishPrice: this.dishPrice,
               time: this.time,
               ratting: 0,
@@ -429,6 +463,7 @@ export class RestdetailsComponent implements OnInit {
               status: 'open',
               closeTime: this.closeTime,
               city: this.city,
+              tax_cities:this.tax_cities,
               images: [
                 this.image1 ? this.image1 : '',
                 this.image2 ? this.image2 : '',
@@ -568,5 +603,13 @@ export class RestdetailsComponent implements OnInit {
 
   getCurrency() {
     return this.api.getCurrecySymbol();
+  }
+
+  addCharge(){
+    this.chargeList.push({distance:'',charge:''});
+    console.log(this.chargeList);
+  }
+  removeSize(i){
+    this.chargeList.splice(i, 1);
   }
 }

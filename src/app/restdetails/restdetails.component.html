@@ -60,8 +60,8 @@
           </div>
 
           <!-- <div class="col-sm-6">
-            <label>Select Cuisine</label>
-            <ng-select  [(ngModel)]="selectedItems" [settings]="dropdownSettings" bindLabel="item_text" bindValue="item_id" [placeholder]="'Select Cusines'" [multiple]="true" [closeOnSelect]="false"
+            <label>Select Cusine</label>
+            <ng-select  [(ngModel)]="selectedItems" [settings]="dropdownSettings" bindLabel="item_text" bindValue="item_id" [placeholder]="'Select Cusines'" [closeOnSelect]="false"
               name="fieldName" ngDefaultControl  [items]="dropdownList" (onSelect)="onItemSelect($event)"
               (onSelectAll)="onSelectAll($event)">
             </ng-select>
@@ -80,20 +80,7 @@
               [data]="dropdownListDP" [(ngModel)]="selectedItemsDP" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
           </div>
-
-          <!-- <div class="col-sm-6">
-            <label>Select Cuisine</label>
-            <ng-select  [(ngModel)]="selectedItemsDP" [placeholder]="'Select Delivery/PickUp' || '&nbsp;'" bindLabel="item_text" bindValue="item_id" [multiple]="true" [closeOnSelect]="false"
-              ngDefaultControl [settings]="dropdownSettings" [items]="dropdownList" (onSelect)="onItemSelect($event)"
-              (onSelectAll)="onSelectAll($event)">
-            </ng-select>
-          </div> -->
-
-          <div class="col-sm-6">
-            <label>Delivery Charge</label>
-            <input type="text" [(ngModel)]="deliveryCharge" class="form-control" placeholder="Delivery Charge $" >
-          </div>
-
+          
           <div class="col-sm-6">
             <label>Per Person Dish $</label>
             <input [(ngModel)]="dishPrice" type="number" class="form-control" placeholder="Per Person Dish $">
@@ -108,15 +95,38 @@
             <input [(ngModel)]="closeTime" type="time" class="form-control"
               [placeholder]="'Closing Time' || '&nbsp;'">
           </div>
-          <div class="col-sm-6">
+
+          <div class="col-sm-12 mt-3">
+            <button class="btn btn-success btn-round" style="float:right;font-size:20px;" (click)="addCharge()">+</button>
+            <h1 class="sub-title" style="font-size:18px;">
+              Delivery Charge
+            </h1>
+          </div>
+
+          <div class="charge-list col-12"  *ngFor="let s of chargeList; let in=index" >
+            <div class="col-sm-5">
+              <label>Select distance</label>
+              <ng-select  [(ngModel)]="chargeList[in].distance" [settings]="dropdownSettings" bindLabel="item_text" bindValue="item_id" [placeholder]="'Select distance'" [closeOnSelect]="false"
+                name="fieldName" ngDefaultControl  [items]="dropdownListMile" (onSelect)="onItemSelect($event)">
+              </ng-select>
+            </div>
+  
+            <div class="col-sm-5">
+              <label>Delivery Charge</label>
+              <input type="text" [(ngModel)]="chargeList[in].charge" class="form-control" placeholder="Delivery Charge $" >
+            </div>
+
+            <div class="col-sm-2">
+              <button class="btn btn-sm btn-danger" (click)="removeSize(in)">
+                <i class="icofont icofont-bin"></i> 
+              </button> 
+            </div>
+          </div>
+
+          <div class="col-sm-12">
             <label>Estimated Delivery time</label>
             <input [(ngModel)]="time" type="number" class="form-control"
               [placeholder]="'Estimated Delivery time' || '&nbsp;'">
-          </div>
-          <div class="col-sm-12">
-            <label>Restaurant Description</label>
-            <textarea [(ngModel)]="descritions" rows="5" cols="5" class="form-control"
-              [placeholder]="'Restaurant Description' || '&nbsp;'"></textarea>
           </div>
           <div class="col-sm-12">
             <label>Select city</label>
@@ -124,6 +134,17 @@
               <option *ngFor="let item of cities" [value]="item.id">{{item.name}}</option>
             </select>
           </div>
+          <div class="col-sm-12">
+            <label>Restaurant Description</label>
+            <textarea [(ngModel)]="descritions" rows="5" cols="5" class="form-control"
+              [placeholder]="'Restaurant Description' || '&nbsp;'"></textarea>
+          </div>   
+          
+          <div class="col-sm-6">
+            <label>Tax</label>
+            <input type="text" [(ngModel)]="tax_cities" type="number" class="form-control" placeholder="Tax %" >
+          </div>
+          
         </div>
         <div class="form-group row">
           <label class="col-sm-4 col-form-label">Upload cover image here</label>

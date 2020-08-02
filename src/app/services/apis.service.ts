@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { environment } from './../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { resolve } from 'url';
+import { el } from 'date-fns/locale';
 
 export class AuthInfo {
   constructor(public $uid: string) { }
@@ -906,8 +907,14 @@ public getFood(id,uuid): Promise<any> {
     console.log("********************");
     console.log(informations); 
     console.log("********************");
+    var del_id;
+    if (informations.uuid){
+      del_id = informations.uuid;
+    } else {
+      del_id = informations.uid;
+    }
     return new Promise<any>((resolve, reject) => {
-      this.adb.collection('foods/'+informations.uid+'/all').doc(informations.id).delete().then((data) => {
+      this.adb.collection('foods/'+del_id+'/all').doc(informations.id).delete().then((data) => {
         resolve(data);
       }, error => {
         reject(error);
